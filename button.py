@@ -4,8 +4,7 @@ from signal import pause
 button = Button(2)
 led = LED(17)
 
-while 1:
-    if button.is_active():
-        led.on()
-    else:
-        led.off()
+button.when_activated = led.on
+button.when_deactivated = led.off
+
+pause()
