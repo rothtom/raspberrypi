@@ -1,23 +1,22 @@
-#include <wiringPi.h>
+#include <pigpio.h>
 #include <iostream>
 
-#define LEDPin 5
+#define LEDPin 17
 
 int main() {
-    wiringPiSetup();
-
-    pinMode(LEDPin, OUTPUT);
-    digitalWrite(LEDPin, LOW);
-
-    while (true) {
-        digitalWrite(LEDPin, HIGH);
-        std::cout << "HIGH" << std::endl;
-        delay(1000);
-        digitalWrite(LEDPin, LOW);
-        std::cout << "LOW" << std::endl;
-        delay(1000);
+    if (gpioInitialise() < 0) {
+        std::cerr << "Initialisation failed" << std::endl;
+        return 1;
     }
     
+    gpioSetMode(LEDPin, PI_OUTPUT);
+
+    while(true) {
+        gpioWrite(LEDPin, 1);
+        gpioSleep(PI_TIME_RELATIVE, 1, 1);
+        gpioWrite(LEDPin, 0);
+        gpioSleep(PI_TIME_RELATIVE, 1, 1);
+    }
 
     return 0;
 }
