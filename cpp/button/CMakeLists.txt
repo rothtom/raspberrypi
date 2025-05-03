@@ -7,6 +7,6 @@ set(CMAKE_CXX_COMPILE_FLAGS "-Wall" "-Werr")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GPIOD REQUIRED libgpiod)
+pkg_check_modules(GPIOD REQUIRED libgpiodcxx)
 
 add_subdirectory(src)
