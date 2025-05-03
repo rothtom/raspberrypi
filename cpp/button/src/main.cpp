@@ -13,16 +13,16 @@ int main() {
         auto button_line = chip.get_line(21); // BCM GPIO17
 
         // Request lines
-        led_line.request({
+        led_line.request(gpiod::line_request({
             .consumer = "led",
             .request_type = gpiod::line_request::DIRECTION_OUTPUT,
-            0,
-        });
+        }), 
+            0);
 
-        button_line.request({
+        button_line.request(gpiod::line_request({
             .consumer = "button",
             .request_type= gpiod::line_request::DIRECTION_INPUT
-        });
+        }));
 
         std::cout << "Monitoring button and controlling LED...\n";
 
